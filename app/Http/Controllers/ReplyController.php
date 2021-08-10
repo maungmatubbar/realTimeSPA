@@ -15,6 +15,10 @@ class ReplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('JWT', ['except' => ['index', 'show']]);
+    }
     public function index(Question $question)
     {
         return  ReplyResource::collection($question->replies);
@@ -72,6 +76,7 @@ class ReplyController extends Controller
      * @param  \App\Model\Reply  $reply
      * @return \Illuminate\Http\Response
      */
+
     public function update(Question $question, Request $request, Reply $reply)
     {
         $reply->update($request->all());

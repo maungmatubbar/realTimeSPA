@@ -14,6 +14,10 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('JWT', ['except' => ['index', 'show']]);
+    }
     public function index()
     {
         return CategoryResource::collection(Category::latest()->get());
