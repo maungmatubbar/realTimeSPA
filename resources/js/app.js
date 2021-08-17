@@ -10,8 +10,11 @@ import User from './helpers/User'
 
 Vue.use(Vuetify)
 window.User = User
-console.log(User.id());
+    //console.log(User.loggedIn());
 
+//Logout EventBus use
+
+window.EventBus = new Vue();
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 

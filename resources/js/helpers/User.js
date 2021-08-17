@@ -13,6 +13,8 @@ class User {
         console.log(access_token)
         if (Token.isValidToken(access_token)) {
             AppStorage.store(username, access_token)
+                //redirect and reload 
+            window.location = '/forum';
         }
 
     }
@@ -28,6 +30,8 @@ class User {
     }
     logout() {
         AppStorage.clear()
+            //reload page and redirect 
+        window.location = '/forum';
     }
     name() {
         if (this.loggedIn) {
@@ -36,7 +40,7 @@ class User {
     }
     id() {
         if (this.loggedIn) {
-            const payload = Token.payload(AppStorage.getToken())
+            const payload = Token.payload(AppStorage.getToken)
             return payload.sub
         }
     }
