@@ -1,6 +1,7 @@
 import Token from "./Token";
 import AppStorage from './AppStorage'
 
+
 class User {
     login(formdata) {
         axios.post('/api/auth/login', formdata)
@@ -14,7 +15,7 @@ class User {
         if (Token.isValidToken(access_token)) {
             AppStorage.store(username, access_token)
                 //redirect and reload 
-            window.location = '/forum';
+            window.location.href = '/forum';
         }
 
     }
@@ -38,12 +39,17 @@ class User {
             return AppStorage.getUser()
         }
     }
-    id() {
+    userId() {
         if (this.loggedIn) {
-            const payload = Token.payload(AppStorage.getToken)
+            const payload = Token.payload(AppStorage.getToken())
             return payload.sub
         }
+
     }
+    ownId(id) {
+        return this.userId() == id
+    }
+
 
 }
 

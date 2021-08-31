@@ -3,11 +3,11 @@
         <v-card-title primary-title>
             <div>
                 <router-link :to="data.path"><h3 class="headline md-0">{{data.title}}</h3></router-link>
-                <div class="grey--text">{{data.created_at}}</div>
+                <div class="grey--text"> {{ data.user }} said {{data.created_at}}</div>
             </div>
         </v-card-title>
         <v-card-text>
-            {{ data.body }}
+          {{ data.body }}
         </v-card-text>
     </v-card>
 </template>

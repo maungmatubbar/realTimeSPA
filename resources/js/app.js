@@ -5,7 +5,11 @@ window.Vue = require('vue');
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import User from './helpers/User'
+import marked from 'marked'
+window.marked = marked
 
+import VueSimplemde from 'vue-simplemde'
+Vue.component('vue-simplemde', VueSimplemde)
 
 
 Vue.use(Vuetify)

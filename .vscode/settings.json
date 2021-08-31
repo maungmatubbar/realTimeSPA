@@ -1,0 +1,30 @@
+{
+    "vetur.completion.scaffoldSnippetSources": {
+
+
+        "workspace": "💼",
+        "user": "🗒️",
+        "vetur": "✌"
+    },
+    "[json]": {
+
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace"
+    },
+    "vetur.experimental.templateInterpolationService": false,
+    "moduleResolution": "node",
+    "tslint.suppressWhileTypeErrorsPresent": true,
+    "tslint.jsEnable": true,
+    "javascript.format.insertSpaceAfterConstructor": true,
+    "javascript.suggest.completeFunctionCalls": true,
+    "js/ts.implicitProjectConfig.checkJs": true,
+    "js/ts.implicitProjectConfig.experimentalDecorators": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+    "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+    "javascript.validate.enable": false
+}
