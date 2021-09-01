@@ -4,7 +4,10 @@
             <v-card-title>
                 <div class="headline"><v-icon color="#353b48">face</v-icon> {{data.user}}</div>
                 <div class="ml-2">said {{data.created_at}}</div>
+                <v-spacer></v-spacer>
+                <like :content="data"></like>
             </v-card-title>
+           
             <v-divider></v-divider>
 
             <edit-reply :reply="data" v-if="editing"></edit-reply>
@@ -28,9 +31,10 @@
 
 <script>
 import EditReply from './editReply'
+import Like from '../likes/like.vue'
 export default {
     props:['data','index'],
-    components:{EditReply},
+    components:{EditReply,Like},
     data(){
         return {
             editing:false
