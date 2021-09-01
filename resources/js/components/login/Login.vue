@@ -12,6 +12,7 @@
         type="password"
         required
         ></v-text-field>
+         <span class="red--text" v-if="errors.password">{{errors.password[0]}}</span>
         <v-btn color="success" type="submit">
         Login
         </v-btn>
@@ -27,16 +28,19 @@ export default {
             form:{
                 email:null,
                 password:null
-            }
+            },
+            errors:{}
         }
     },
     created(){
         if(User.loggedIn()){
              this.$router.push({name:'forum'})
+             
         }
     },
     methods:{
         login(){
+           
             User.login(this.form)
         }
     }

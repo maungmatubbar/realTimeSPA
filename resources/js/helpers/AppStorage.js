@@ -8,10 +8,12 @@ class AppStorage {
     store(user, token) {
         this.storeUser(user)
         this.storeToken(token)
+
     }
     clear() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+
     }
     getToken() {
         return localStorage.getItem('token')
@@ -19,6 +21,8 @@ class AppStorage {
     getUser() {
         return localStorage.getItem('user')
     }
+
+
 }
 
 export default AppStorage = new AppStorage()

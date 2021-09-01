@@ -1,0 +1,44 @@
+<template>
+  <div>
+      <reply  v-for="(reply,index) in content" 
+      :key="reply.id"
+      :data="reply"
+      :index="index"
+      ></reply>
+  </div>
+</template>
+
+<script>
+import Reply from './reply.vue'
+export default {
+    props:['question'],
+    components: {Reply},
+    data() {
+      return{
+        content :this.question.replies
+      }
+    },
+    created(){
+      this.listen()
+    },
+    methods:{
+      listen() {
+        EventBus.$on('newReply',(reply)=>{
+          this.content.unshift(reply)
+          window.scrollTo(0,0)
+        }),
+        EventBus.$on('deleteReply',(index)=>{
+          axios.delete(`/api/question/${this.question.slug}/reply/${this.content[index].id}`)
+          .then(response =>{
+            this.content.splice(index,1)
+          })
+        })
+      }
+      
+    }
+}
+</script>
+
+<style>
+
+</style>

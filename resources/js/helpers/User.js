@@ -9,20 +9,20 @@ class User {
             .catch(error => console.log(error.response.data))
     }
     responseAfterLogin(res) {
-        const username = res.data.user
         const access_token = res.data.access_token
-        console.log(access_token)
+        const username = res.data.user
+
         if (Token.isValidToken(access_token)) {
             AppStorage.store(username, access_token)
                 //redirect and reload 
-            window.location.href = '/forum';
+            window.location = '/forum';
         }
 
     }
     hasToken() {
         const storedToken = AppStorage.getToken();
         if (storedToken) {
-            return Token.isValidToken(storedToken) ? true : false
+            return Token.isValidToken(storedToken) ? true : this.logout()
         }
         return false
     }
@@ -35,20 +35,24 @@ class User {
         window.location = '/forum';
     }
     name() {
-        if (this.loggedIn) {
+        if (this.loggedIn()) {
             return AppStorage.getUser()
         }
     }
-    userId() {
-        if (this.loggedIn) {
+    id() {
+        if (this.loggedIn()) {
             const payload = Token.payload(AppStorage.getToken())
             return payload.sub
         }
 
     }
     ownId(id) {
-        return this.userId() == id
+        return this.id() == id
     }
+    admin() {
+        return this.id() == 20
+    }
+
 
 
 }

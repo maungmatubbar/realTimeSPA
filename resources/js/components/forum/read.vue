@@ -1,9 +1,13 @@
 <template>
-    <div>
+    <div v-if="question">
         <edit-question v-if="editing" :data= question></edit-question>
         <div v-else>
              <show-question :data = question
               v-if="question"></show-question>
+             <v-container>
+                  <replies :question = "question" ></replies>
+                 <new-reply :questionSlug="question.slug"></new-reply>
+             </v-container>
         </div>
     </div>
 </template>
@@ -11,13 +15,16 @@
 <script>
 import ShowQuestion from './showQuestion.vue'
 import EditQuestion from './editQuestion.vue'
+import Replies from '../reply/replies'
+import NewReply from '../reply/newReply'
     export default {
-        components:{ShowQuestion,EditQuestion},
+        components:{ShowQuestion,EditQuestion,Replies,NewReply},
         data(){
             return{
                 question:null,
-                editing:false
+                editing:false,
             }
+            
         },
         created(){
             this.listen();
