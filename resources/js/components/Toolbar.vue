@@ -4,6 +4,7 @@
 		<router-link class="white--text" to="/">Single Page</router-link>
 		</v-toolbar-title>
 		<v-spacer></v-spacer>
+		<app-notification v-if="loggedIn"></app-notification>
 		<div class="hidden-sm-and-down">
 			<router-link v-for="item in items"
 			:key="item.title"
@@ -16,9 +17,12 @@
 </template>
 
 <script>
+import AppNotification from './AppNotification'
 	export default {
+		components:{AppNotification},
 		data(){
 			return{
+				loggedIn: User.loggedIn(),
 				items:[
 					{title:'Forum',to:'/forum',show:true},
 					{title:'Ask Questions',to:'/ask',show:User.loggedIn()},
