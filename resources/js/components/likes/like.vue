@@ -20,6 +20,14 @@ export default {
             return this.liked ? '#f368e0' : '#ffcccc'
         }
     },
+    created(){
+        Echo.channel('LikeChannel')
+        .listen('LikeEvent', (e) => {
+           if(this.content.id == e.id){
+               e.type==1 ? this.count++ : this.count --
+           }
+        });
+    },
     methods:{
         likeIt(){
             if(User.loggedIn()){

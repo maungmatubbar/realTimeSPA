@@ -37,19 +37,21 @@ export default {
     components:{EditReply,Like},
     data(){
         return {
-            editing:false
+            editing:false,
+
         }
     },
-    created(){
-        this.listen();
-    },
-    computed: {
+     computed: {
         own(){
             return User.ownId(this.data.user_id)
         },
+        
         reply(){
             return marked(this.data.reply)
         },
+    },
+    created(){
+        this.listen();
     },
     methods: {
         destroy(){
