@@ -5,8 +5,8 @@
             <v-text-field
             v-model="form.title"
             label="Title"
-            required
             ></v-text-field>
+            <span class="red--text" v-if="errors.title">{{ errors.title[0] }}</span>
             <v-select
             :items="categories"
             item-text="name"
@@ -14,8 +14,10 @@
             v-model="form.category_id"
             label="Category"
             ></v-select>
+            <span class="red--text" v-if="errors.category_id">The category field is required</span>
             <vue-simplemde v-model="form.body"/>
-            <v-btn color="success" type="submit">
+            <span class="red--text" v-if="errors.body">{{ errors.body[0] }}</span>
+            <v-btn  color="success" type="submit">
             Create
             </v-btn>
         </v-form>
@@ -46,9 +48,15 @@ export default {
         create(){
             axios.post('/api/question',this.form)
             .then(res => this.$router.push(res.data.path))
-            .catch(error =>this.errors = error.response.data.error)
+            .catch(error =>this.errors = error.response.data.errors)
+        }
+    },
+    computed:{
+        disabled(){
+            // return !(this.form.title && this.form.category_id && this.form.body)
         }
     }
+
 }
 </script>
 

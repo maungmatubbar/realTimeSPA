@@ -1,7 +1,7 @@
 <template>
 	<v-toolbar color="#2c3e50" dark>
 		 <v-toolbar-title>
-		<router-link class="white--text" to="/">Single Page</router-link>
+			<router-link class="white--text" to="/">Single Page</router-link>
 		</v-toolbar-title>
 		<v-spacer></v-spacer>
 		<app-notification v-if="loggedIn"></app-notification>

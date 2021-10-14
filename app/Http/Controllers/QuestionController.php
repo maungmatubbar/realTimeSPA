@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuestionRequest;
 use App\Http\Resources\QuestionResource;
 use App\Model\Question;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class QuestionController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(QuestionRequest $request)
     {
         //$request['slug'] = str_slug($request->title);
         // Question::create($request->all());

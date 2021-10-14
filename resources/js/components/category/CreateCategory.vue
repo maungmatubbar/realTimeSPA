@@ -9,6 +9,15 @@
           <v-btn color="info" type="submit" v-if="editSlug">Update</v-btn>
           <v-btn color="primary" type="submit" v-else>Create</v-btn>
       </v-form>
+      <v-alert
+      v-if="errors"
+      :value="true"
+      type="error"
+      dismissible
+      outline
+    >
+     Please give a category name.
+    </v-alert>
       <v-card>
            <v-toolbar
             color="cyan"
@@ -51,7 +60,8 @@ export default {
                 name:null
             },
             categories:{},
-            editSlug:null
+            editSlug:null,
+            errors:null
         }
     },
     created() {
@@ -72,6 +82,7 @@ export default {
                 this.categories.unshift(res.data)
                 this.form.name=null
             })
+            .catch(error => this.errors = error.response.data.errors)
         },
         update(){
             axios.patch(`/api/category/${this.editSlug}`,this.form)
@@ -90,7 +101,8 @@ export default {
             this.categories.splice(index,1)
         }
 
-    }
+    },
+    
     
 }
 </script>
