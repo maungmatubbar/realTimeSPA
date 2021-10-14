@@ -5,6 +5,7 @@ window.Vue = require('vue');
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import User from './helpers/User'
+import Exception from './helpers/Exception';
 import marked from 'marked'
 window.marked = marked
 
@@ -14,6 +15,7 @@ Vue.component('vue-simplemde', VueSimplemde)
 
 Vue.use(Vuetify)
 window.User = User
+window.Exception = Exception
     //console.log(User.loggedIn());
 
 //Logout EventBus use

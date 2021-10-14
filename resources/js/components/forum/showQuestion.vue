@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <v-spacer></v-spacer>
-                <v-btn color="success">{{data.reply_count}} Replies</v-btn>
+                <v-btn color="success">{{replyCount}} Replies</v-btn>
             </v-card-title>
             <v-card-text v-html="body"> </v-card-text>
             <v-card-actions v-if="ownId">
@@ -31,13 +31,30 @@ export default {
     props: ["data"],
     data() {
         return {
-            ownId: User.ownId(this.data.user_id)
+            ownId: User.ownId(this.data.user_id),
+            replyCount:this.data.reply_count
         };
     },
     computed: {
         body() {
             return marked(this.data.body);
         }
+    },
+    created(){
+        EventBus.$on('newReply',()=>{
+            this.replyCount++
+        })
+        Echo.private('App.User.' + User.id())
+        .notification((notification)=>{
+         this.replyCount++
+        })
+        EventBus.$on('deleteReply',()=>{
+             this.replyCount--
+        })
+        Echo.channel('deleteReplyChannel')
+        .listen('DeleteReplyEvent',(e) => {
+            this.replyCount--
+        })
     },
     methods: {
         destroy(){
