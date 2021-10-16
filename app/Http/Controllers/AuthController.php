@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SignupRequest;
+use App\Http\Resources\LoginResource;
 use App\User;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
@@ -29,7 +31,8 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            // return response()->json(['error' => 'Unauthorized'], 401);
+            return response(null, Response::HTTP_BAD_GATEWAY);
         }
 
         return $this->respondWithToken($token);

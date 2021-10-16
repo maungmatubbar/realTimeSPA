@@ -2769,6 +2769,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2787,8 +2788,17 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    // login(){
+    //     User.login(this.form)
+    // }
     login: function login() {
-      User.login(this.form);
+      var _this = this;
+
+      axios.post('/api/auth/login', this.form).then(function (res) {
+        return User.responseAfterLogin(res);
+      })["catch"](function (error) {
+        return _this.errors = error.response.data.errors;
+      });
     }
   }
 });
@@ -65026,6 +65036,12 @@ var render = function() {
             }
           }),
           _vm._v(" "),
+          _vm.errors.email
+            ? _c("span", { staticClass: "red--text" }, [
+                _vm._v(_vm._s(_vm.errors.email[0]))
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _c("v-text-field", {
             attrs: { label: "Password", type: "password", required: "" },
             model: {
@@ -65038,7 +65054,7 @@ var render = function() {
           }),
           _vm._v(" "),
           _vm.errors.password
-            ? _c("span", { staticClass: "red--text" }, [
+            ? _c("div", { staticClass: "red--text" }, [
                 _vm._v(_vm._s(_vm.errors.password[0]))
               ])
             : _vm._e(),
@@ -108770,19 +108786,14 @@ var User = /*#__PURE__*/function () {
   }
 
   _createClass(User, [{
-    key: "login",
-    value: function login(formdata) {
-      var _this = this;
-
-      axios.post('/api/auth/login', formdata).then(function (res) {
-        return _this.responseAfterLogin(res);
-      })["catch"](function (error) {
-        return console.log(error.response.data);
-      });
-    }
-  }, {
     key: "responseAfterLogin",
-    value: function responseAfterLogin(res) {
+    value:
+    /*login(formdata) {
+        axios.post('/api/auth/login', formdata)
+            .then(res => this.responseAfterLogin(res))
+            .catch(error => error.response.data.errors)
+    }*/
+    function responseAfterLogin(res) {
       var access_token = res.data.access_token;
       var username = res.data.user;
 

@@ -3,11 +3,11 @@ import AppStorage from './AppStorage'
 
 
 class User {
-    login(formdata) {
+    /*login(formdata) {
         axios.post('/api/auth/login', formdata)
             .then(res => this.responseAfterLogin(res))
-            .catch(error => console.log(error.response.data))
-    }
+            .catch(error => error.response.data.errors)
+    }*/
     responseAfterLogin(res) {
         const access_token = res.data.access_token
         const username = res.data.user
